@@ -40,17 +40,17 @@ const menuGroups = [
       {
         icon: <MdHomeFilled className="h-5 w-5 " />,
         label: "Dashboard",
-        route: "#",
+        route: "/dashboard",
       },
       {
         icon: <GiTabletopPlayers className="h-5 w-5 " />,
         label: "Players",
-        route: "#",
+        route: "/players",
       },
       {
         icon: <TbUserOff className="h-5 w-5 " />,
         label: "Blocked Players",
-        route: "#",
+        route: "/blocked-player",
       },
       {
         icon: <FaEarthAfrica className="h-5 w-5 " />,

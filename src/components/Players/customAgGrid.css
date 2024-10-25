@@ -1,0 +1,25 @@
+/* Hide the scrollbar but keep the scrolling functionality */
+.ag-theme-alpine .ag-body-viewport {
+  overflow: auto; /* Allow scrolling */
+}
+
+/* Hide vertical scrollbar */
+.ag-theme-alpine .ag-body-viewport::-webkit-scrollbar {
+  width: 0; /* Hide vertical scrollbar */
+}
+
+.ag-theme-alpine .ag-body-viewport::-webkit-scrollbar-thumb {
+  background: transparent; /* Hide thumb */
+}
+
+.ag-theme-alpine .ag-body-viewport::-webkit-scrollbar-track {
+  background: transparent; /* Hide track */
+}
+
+/* Hide horizontal scrollbar */
+.ag-theme-alpine .ag-body-viewport::-webkit-scrollbar {
+  height: 0; /* Hide horizontal scrollbar */
+}
+.ag-theme-alpine .ag-body-viewport {
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
