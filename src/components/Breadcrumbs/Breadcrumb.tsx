@@ -1,7 +1,7 @@
 import Link from "next/link";
 interface BreadcrumbProps {
   pageName: string;
-  titleShow: boolean;
+  titleShow?: boolean;
 }
 const Breadcrumb = ({ pageName, titleShow = false }: BreadcrumbProps) => {
   return (
