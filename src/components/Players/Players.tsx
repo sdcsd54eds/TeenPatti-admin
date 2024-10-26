@@ -19,17 +19,13 @@ function Players() {
         <div className="text-dark mb-4 text-2xl font-semibold md:mb-0 md:text-3xl">
           Players
         </div>
-
-        {/* Search Bar and Settings */}
         <div className="flex w-full items-center space-x-4 md:w-auto">
-          {/* Search Form */}
           <form
             action="https://formbold.com/s/unique_form_id"
             method="POST"
             className="w-full md:w-auto"
           >
             <div className="relative w-full md:w-64 lg:w-[350px]">
-              {/* Search Icon */}
               <button className="absolute left-3 top-1/2 -translate-y-1/2 transform">
                 <HiMagnifyingGlass className="h-5 w-5 text-white" />
               </button>
@@ -41,8 +37,6 @@ function Players() {
               />
             </div>
           </form>
-
-          {/* Settings Icon */}
           <div className="cursor-pointer rounded-xl bg-gray-400 p-2.5 text-white">
             <CiSettings className="h-6 w-6 md:h-7 md:w-7" />
           </div>

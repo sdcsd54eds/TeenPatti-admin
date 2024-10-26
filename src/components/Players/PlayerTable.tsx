@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { ColDef } from "ag-grid-community";
 import "./customAgGrid.css"; // Import your custom CSS
+import Image from "next/image";
 
 // Define a type for your row data
 interface RowData {
@@ -162,7 +163,7 @@ const AdGridTable: React.FC = () => {
       headerName: "Name",
       cellRenderer: (params: any) => (
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img
+          <Image
             src={params.data.avatar}
             alt="avatar"
             style={{

@@ -13,9 +13,11 @@ import { VscGraphLine } from "react-icons/vsc";
 import { FaEarthAfrica } from "react-icons/fa6";
 import { RiSettingsLine } from "react-icons/ri";
 import { FaUserShield } from "react-icons/fa";
+import { GiCardAceSpades } from "react-icons/gi";
 import { MdHomeFilled } from "react-icons/md";
 import { IoLogOutOutline } from "react-icons/io5";
 import { TbUserOff } from "react-icons/tb";
+import { FaDice } from "react-icons/fa6";
 import { TiMessageTyping } from "react-icons/ti";
 import { MdContactPage } from "react-icons/md";
 import { GiDoubleDiaphragm } from "react-icons/gi";
@@ -27,6 +29,7 @@ import { FaStore } from "react-icons/fa";
 import { FaRegSmile } from "react-icons/fa";
 import { GiCardRandom } from "react-icons/gi";
 import DarkModeSwitcher from "../Header/DarkModeSwitcher";
+import Divider from "../common/Divider/Divider";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -38,32 +41,32 @@ const menuGroups = [
     name: "General",
     menuItems: [
       {
-        icon: <MdHomeFilled className="h-5 w-5 " />,
+        icon: <MdHomeFilled className="h-5 w-5" />,
         label: "Dashboard",
         route: "/dashboard",
       },
       {
-        icon: <GiTabletopPlayers className="h-5 w-5 " />,
+        icon: <GiTabletopPlayers className="h-5 w-5" />,
         label: "Players",
         route: "/players",
       },
       {
-        icon: <TbUserOff className="h-5 w-5 " />,
+        icon: <TbUserOff className="h-5 w-5" />,
         label: "Blocked Players",
         route: "/blocked-player",
       },
       {
-        icon: <FaEarthAfrica className="h-5 w-5 " />,
+        icon: <FaEarthAfrica className="h-5 w-5" />,
         label: "Website Details",
         route: "#",
       },
       {
-        icon: <BsMicrosoft className="h-5 w-5 " />,
+        icon: <BsMicrosoft className="h-5 w-5" />,
         label: "App Version",
         route: "#",
       },
       {
-        icon: <FaRegSmile className="h-5 w-5 " />,
+        icon: <FaRegSmile className="h-5 w-5" />,
         label: "Emoji",
         route: "#",
       },
@@ -74,17 +77,17 @@ const menuGroups = [
     name: "Rewards",
     menuItems: [
       {
-        icon: <GiDoubleDiaphragm className="h-5 w-5 " />,
+        icon: <GiDoubleDiaphragm className="h-5 w-5" />,
         label: "Welcome Chips",
         route: "#",
       },
       {
-        icon: <IoDiamondOutline className="h-5 w-5 " />,
+        icon: <IoDiamondOutline className="h-5 w-5" />,
         label: "Daily Reward",
         route: "#",
       },
       {
-        icon: <VscGraphLine className="h-5 w-5 " />,
+        icon: <VscGraphLine className="h-5 w-5" />,
         label: "Ad Reward",
         route: "#",
       },
@@ -95,7 +98,7 @@ const menuGroups = [
     name: "Rewards",
     menuItems: [
       {
-        icon: <FaRegBell className="h-5 w-5 " />,
+        icon: <FaRegBell className="h-5 w-5" />,
         label: "Live Notification",
         route: "#",
       },
@@ -105,7 +108,7 @@ const menuGroups = [
         route: "#",
       },
       {
-        icon: <FaUserShield className="h-5 w-5 " />,
+        icon: <FaUserShield className="h-5 w-5" />,
         label: "Admin Logs",
         route: "#",
       },
@@ -115,7 +118,7 @@ const menuGroups = [
         route: "#",
       },
       {
-        icon: <MdContactPage className="h-5 w-5 " />,
+        icon: <MdContactPage className="h-5 w-5" />,
         label: "Update Chips Logs",
         route: "#",
       },
@@ -138,20 +141,14 @@ const menuGroups = [
   },
 
   {
-    name: null,
     menuItems: [
       {
-        icon: <GiCardRandom className="h-5 w-5 " />,
+        icon: <FaDice className="h-5 w-5" />,
         label: "My games",
         route: "#",
       },
-    ],
-  },
-  {
-    name: null,
-    menuItems: [
       {
-        icon: <GiCardRandom className="h-5 w-5 " />,
+        icon: <GiCardRandom className="h-5 w-5" />,
         label: "Teen Patti",
         route: "#",
         children: [
@@ -160,35 +157,18 @@ const menuGroups = [
           { label: "Ad Reward", route: "#" },
         ],
       },
-    ],
-  },
-  {
-    // name: null,
-    menuItems: [
       {
-        icon: <GiCardRandom className="h-5 w-5 " />,
+        icon: <GiCardAceSpades className="h-5 w-5" />,
         label: "Rummy",
         route: "#",
-        // children: [
-        //   { label: "Welcome Chips", route: "/" },
-        //   { label: "Daily Reward", route: "/" },
-        //   { label: "Ad Reward", route: "/" },
-        // ],
+        children: [],
       },
-    ],
-  },
-  {
-    // name: null,
-    menuItems: [
       {
-        icon: <GiCardRandom className="h-5 w-5 " />,
+        icon: <GiCardRandom className="h-5 w-5" />,
+        divider: false,
         label: "Ludo",
         route: "#",
-        // children: [
-        //   { label: "Welcome Chips", route: "/" },
-        //   { label: "Daily Reward", route: "/" },
-        //   { label: "Ad Reward", route: "/" },
-        // ],
+        children: [],
       },
     ],
   },
@@ -241,7 +221,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
         <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           {/* <!-- Sidebar Menu --> */}
-          <nav className="mt-2 px-4 py-4 lg:mt-2 lg:px-6">
+          <Divider className="border-gray-600" />
+          <nav className="mt-2 px-4 py-4 lg:mt-2 lg:px-0">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
@@ -249,18 +230,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </h3>
 
                 <ul className="mb-6 flex flex-col gap-1.5">
-                  {group.menuItems.map((menuItem, menuIndex) => (
-                    <SidebarItem
-                      key={menuIndex}
-                      item={menuItem}
-                      pageName={pageName}
-                      setPageName={setPageName}
-                    />
-                  ))}
+                  {group.menuItems &&
+                    group.menuItems.map((menuItem, menuIndex) => (
+                      <SidebarItem
+                        key={menuIndex}
+                        item={menuItem}
+                        pageName={pageName}
+                        setPageName={setPageName}
+                      />
+                    ))}
+                  <Divider className="border-gray-600" />
                 </ul>
               </div>
             ))}
-            <div className="flex">
+            <div className="mt-10 flex pb-3">
               <div className="items-start px-4 text-start align-middle">
                 <DarkModeSwitcher />
               </div>
@@ -269,7 +252,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
             <div className="flex items-center justify-between bg-gray-800 p-4">
               <div className="flex items-center space-x-3">
-                <img
+                <Image
                   src="/images/user/user-01.png"
                   alt="User"
                   className="h-10 w-10 rounded-full object-cover"
