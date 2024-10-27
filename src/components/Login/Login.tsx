@@ -1,4 +1,3 @@
-// src/components/Login/Login.tsx
 "use client";
 import { loginAdmin } from "@/api/api";
 import useSnackbar from "@/hooks/useSnackbar";
@@ -11,7 +10,6 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { showSnackbar } = useSnackbar();
-
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -20,7 +18,7 @@ export default function Login() {
 
     try {
       console.log("Navigating to /dashboard");
-      showSnackbar("login successfully", "success");
+      showSnackbar("Login successful", "success");
       router.push("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
@@ -29,30 +27,28 @@ export default function Login() {
   };
 
   return (
-    <div className="relative h-screen">
-      <Image
-        src={require("../../../public/images/logo/Image.png")}
-        alt="User"
-        layout="fill"
-        objectFit="cover"
-        className="relative" // Image is relatively positioned
-      />
-      <div
-        className="absolute max-w-md rounded-md bg-white px-6 py-12 shadow-lg lg:px-8"
-        style={{
-          top: "40%",
-          left: "80%",
-          transform: "translate(-70%, -10%)",
-        }}
-      >
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+    <div className="relative flex h-screen items-center justify-center bg-black bg-opacity-50">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={require("../../../public/images/logo/Image.png")}
+          alt="Background Image"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-50"
+        />
+      </div>
+
+      {/* Overlay Card */}
+      <div className="relative z-10 mx-4 w-full max-w-lg rounded-lg bg-white bg-opacity-30 p-8 shadow-lg backdrop-blur-md sm:mx-auto">
+        <h2 className="text-center text-2xl font-bold leading-tight text-gray-900">
           Sign in to your account
         </h2>
-        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-sm font-medium text-gray-900"
             >
               Username
             </label>
@@ -66,15 +62,16 @@ export default function Login() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 autoComplete="email"
-                className="block w-full rounded-md border-0 py-1.5 ps-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
+
           <div>
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium text-gray-900"
               >
                 Password
               </label>
@@ -96,15 +93,17 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                className="block w-full rounded-md border-0 py-1.5 ps-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
-          {error && <p className="text-red-500">{error}</p>}
+
+          {error && <p className="text-sm text-red-500">{error}</p>}
+
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Login
             </button>
