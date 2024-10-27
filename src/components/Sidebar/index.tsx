@@ -257,7 +257,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <Image
                   width={112}
                   height={112}
-                  src="/images/user/user-01.png"
+                  src={"/images/user/user1.jpg"}
                   alt="User"
                   className="h-10 w-10 rounded-full object-cover"
                 />

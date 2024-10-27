@@ -1,7 +1,6 @@
 "use client";
 import "jsvectormap/dist/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
-import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
@@ -19,6 +18,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="icon"
+          href="/images/logo/main-logo.svg"
+          type="image/svg+xml"
+        />
+      </head>
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
           <SnackbarProvider

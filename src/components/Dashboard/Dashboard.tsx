@@ -5,6 +5,10 @@ import { CiSettings } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Switch from "@mui/material/Switch";
 import useSnackbar from "@/hooks/useSnackbar";
+import DashboardCard1 from "./DashboardCard1";
+import { FaGamepad, FaHeart, FaStore } from "react-icons/fa6";
+import DashboardCard2 from "./DashboardCard2";
+import { BsFillHandbagFill } from "react-icons/bs";
 
 const Dashboard: React.FC = () => {
   const [serverDown, setServerDown] = useState(false);
@@ -66,6 +70,49 @@ const Dashboard: React.FC = () => {
                 color="primary"
               />
             </label>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 2xl:gap-8">
+        <div className="grid">
+          <DashboardCard1
+            className="bg-[#605CFF4D]"
+            title="Players"
+            total="178+"
+          >
+            <FaHeart className="h-5 w-5 text-[#6254FF]" />
+          </DashboardCard1>
+          <div className="mt-4">
+            <DashboardCard2 />
+          </div>
+        </div>
+        <div className="grid">
+          <DashboardCard1
+            className="bg-[#2FE5A74D]"
+            title="Teen Patti"
+            total="20+"
+          >
+            <FaGamepad className="h-6 w-6 text-[#2FE5A7]" />
+          </DashboardCard1>
+          <div className="mt-4">
+            <DashboardCard2 />
+          </div>
+        </div>
+        <div className="grid">
+          <DashboardCard1 className="bg-[#FF69B44D]" title="Ludo" total="90+">
+            <BsFillHandbagFill className="h-5 w-5 text-[#FF69B4]" />
+          </DashboardCard1>
+          <div className="mt-4">
+            <DashboardCard2 />
+          </div>
+        </div>
+        <div className="grid">
+          <DashboardCard1 className="bg-[#605CFF4D]" title="Rummy" total="12+">
+            <FaStore className="h-5 w-5 text-white" />
+          </DashboardCard1>
+          <div className="mt-4">
+            <DashboardCard2 />
           </div>
         </div>
       </div>

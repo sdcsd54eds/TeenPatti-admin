@@ -5,7 +5,6 @@ import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
-import DropdownDefault from "../Dropdowns/DropdownDefault";
 import { usePathname } from "next/navigation";
 
 const Header = (props: {
@@ -58,16 +57,6 @@ const Header = (props: {
               </span>
             </span>
           </button>
-          {/* <!-- Hamburger Toggle BTN --> */}
-
-          {/* <Link className="block flex-shrink-0 lg:hidden" href="/">
-            <Image
-              width={32}
-              height={32}
-              src={"/images/logo/logo-icon.svg"}
-              alt="Logo"
-            />
-          </Link> */}
         </div>
 
         <div className="hidden items-start pt-4 sm:flex">

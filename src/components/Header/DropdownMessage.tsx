@@ -96,7 +96,7 @@ const DropdownMessage = () => {
                   href="/messages"
                 >
                   <div className="h-12.5 w-12.5 rounded-full">
-                    <Image
+                    {/* {/* <Image
                       width={112}
                       height={112}
                       src={"/images/user/user-01.png"}
@@ -104,8 +104,8 @@ const DropdownMessage = () => {
                       style={{
                         width: "auto",
                         height: "auto",
-                      }}
-                    />
+                      }} 
+                    /> */}
                   </div>
 
                   <div>

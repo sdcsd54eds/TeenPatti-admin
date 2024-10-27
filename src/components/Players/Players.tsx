@@ -31,7 +31,7 @@ function Players() {
           <span className="text-md text-[#6E6DFE]">Total Chips: </span>
           <span className="text-md pl-1 text-[#6E6DFE]">10,000</span>
         </div>
-        <div className="flex w-full items-center space-x-4 md:w-auto">
+        <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-4 md:space-y-0">
           <span className="text-lg font-medium">Login Type</span>
           <div
             onMouseEnter={() => setIsOpen(true)}
@@ -73,15 +73,13 @@ function Players() {
             )}
           </div>
 
-          <div className="cursor-pointer rounded-xl bg-[#6E6DFE] px-4 py-2 text-white transition-colors duration-200 hover:bg-[#5a59da]">
-            <button className="focus:outline-none">
-              <button
-                onClick={HandleDeleteAllPlayer}
-                className="flex items-center"
-              >
-                <LuTrash className="mr-1 h-4 w-4" />
-                <span className="text-md">Delete All</span>
-              </button>
+          <div className="flex-shrink-0 cursor-pointer rounded-xl bg-[#6E6DFE] px-4 py-2 text-white transition-colors duration-200 hover:bg-[#5a59da]">
+            <button
+              onClick={HandleDeleteAllPlayer}
+              className="flex items-center focus:outline-none"
+            >
+              <LuTrash className="mr-1 h-4 w-4" />
+              <span className="text-md">Delete All</span>
             </button>
           </div>
         </div>
