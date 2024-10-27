@@ -38,7 +38,7 @@ const DropdownUser = () => {
           </div>
           <div className="flex">
             <span>
-              <GoDotFill className="mt-1  flex h-3 w-3 items-center text-center align-middle" />
+              <GoDotFill className="mt-1 flex h-3 w-3 items-center text-center align-middle" />
             </span>
             <span className="block items-start text-start text-sm font-bold text-green-500">
               Online

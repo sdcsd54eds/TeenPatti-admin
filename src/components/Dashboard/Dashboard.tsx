@@ -4,21 +4,25 @@ import DashboardTable from "./DashboardTable";
 import { CiSettings } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Switch from "@mui/material/Switch";
+import useSnackbar from "@/hooks/useSnackbar";
 
 const Dashboard: React.FC = () => {
   const [serverDown, setServerDown] = useState(false);
   const [playerLimit, setPlayerLimit] = useState(false);
+  const { showSnackbar } = useSnackbar();
 
   const handleServerDownChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setServerDown(event.target.checked);
+    showSnackbar("server down", "default");
   };
 
   const handlePlayerLimitChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setPlayerLimit(event.target.checked);
+    showSnackbar("Player limit", "default");
   };
 
   return (

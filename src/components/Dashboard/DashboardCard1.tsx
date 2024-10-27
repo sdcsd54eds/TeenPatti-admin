@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 interface CardDataStatsProps {
   title: string;
   total: string;
-  ClassName: string;
+  className: string;
   children: ReactNode;
 }
 
@@ -11,13 +11,13 @@ const DashboardCard1: React.FC<CardDataStatsProps> = ({
   title,
   total,
   children,
-  ClassName,
+  className,
 }) => {
   return (
     <div className="w-full rounded-t-2xl border border-stroke bg-white p-4 shadow-lg dark:border-strokedark dark:bg-boxdark sm:p-6 lg:p-8">
       <div className="flex items-center space-x-4">
         <div
-          className={`${ClassName} flex h-12 w-12 items-center justify-center rounded-full sm:h-14 sm:w-14 md:h-16 md:w-16`}
+          className={`${className} flex h-12 w-12 items-center justify-center rounded-full sm:h-14 sm:w-14 md:h-16 md:w-16`}
         >
           {children}
         </div>

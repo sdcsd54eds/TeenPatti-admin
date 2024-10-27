@@ -5,17 +5,14 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
+import { SnackbarProvider } from "notistack";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-
-  // const pathname = usePathname();
-
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
   }, []);
@@ -24,7 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          {loading ? <Loader /> : children}
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            autoHideDuration={1000}
+          >
+            {loading ? <Loader /> : children}
+          </SnackbarProvider>
         </div>
       </body>
     </html>

@@ -30,6 +30,7 @@ import { FaRegSmile } from "react-icons/fa";
 import { GiCardRandom } from "react-icons/gi";
 import DarkModeSwitcher from "../Header/DarkModeSwitcher";
 import Divider from "../common/Divider/Divider";
+import useAuth from "@/app/context/AuthContext";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -176,6 +177,7 @@ const menuGroups = [
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
+  const { logout } = useAuth();
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
 
   return (
@@ -253,6 +255,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <div className="flex items-center justify-between bg-gray-800 p-4">
               <div className="flex items-center space-x-3">
                 <Image
+                  width={112}
+                  height={112}
                   src="/images/user/user-01.png"
                   alt="User"
                   className="h-10 w-10 rounded-full object-cover"
@@ -261,7 +265,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </div>
               <div className="flex items-center space-x-4">
                 <FaRegBell className="text-xl text-white" />
-                <IoLogOutOutline className="text-xl text-white" />
+                <button onClick={logout}>
+                  <IoLogOutOutline className="text-xl text-white" />
+                </button>
               </div>
             </div>
           </nav>

@@ -144,7 +144,7 @@ const AdGridTable: React.FC = () => {
       avatar: "https://i.pravatar.cc/50?img=3",
     },
     {
-      invoiceId: "#876369",
+      invoiceId: "#8763693",
       name: "Bethany Jackson",
       email: "Bethany@gmail.com",
       date: "14 Dec, 2020",
@@ -166,6 +166,8 @@ const AdGridTable: React.FC = () => {
           <Image
             src={params.data.avatar}
             alt="avatar"
+            height={30}
+            width={30}
             style={{
               width: "30px",
               height: "30px",
@@ -187,10 +189,21 @@ const AdGridTable: React.FC = () => {
 
   return (
     <div
-      className={`ag-theme-alpine overflow-auto ${true ? "dark:bg-form-input dark:text-white" : "bg-white text-black"}`}
+      className="ag-theme-alpine overflow-auto bg-white text-black dark:bg-gray-900 dark:text-white"
       style={{ height: 400, width: "100%" }}
     >
-      <AgGridReact<RowData> rowData={rowData} columnDefs={columnDefs} />
+      <AgGridReact<RowData>
+        rowData={rowData}
+        columnDefs={columnDefs}
+        defaultColDef={{
+          sortable: true,
+          filter: true,
+          floatingFilter: true,
+          resizable: true,
+        }}
+        animateRows={true}
+        // onGridReady={(params) => params.api.sizeColumnsToFit()} // Fit columns to the grid width
+      />{" "}
     </div>
   );
 };

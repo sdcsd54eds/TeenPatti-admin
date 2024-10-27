@@ -1,5 +1,5 @@
 export type Package = {
-  name: string;
+  name: any;
   price: number;
   invoiceDate: string;
   status: string;
