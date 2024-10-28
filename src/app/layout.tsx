@@ -3,8 +3,11 @@ import "jsvectormap/dist/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
-import Loader from "@/components/common/Loader";
+import Loader from "@/components/common/Loader/index";
 import { SnackbarProvider } from "notistack";
+import { AuthProvider } from "./context/AuthContext";
+import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 export default function RootLayout({
   children,
@@ -13,8 +16,17 @@ export default function RootLayout({
 }>) {
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
-    setTimeout(() => setLoading(false), 100);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
+
+  const router = useRouter();
+  const token = getCookie("token");
+  // useEffect(() => {
+  //   if (!token) {
+  //     router.push("/login");
+  //   }
+  //   console.log("object :>> ");
+  // }, [token, router]);
 
   return (
     <html lang="en">
@@ -27,13 +39,15 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          <SnackbarProvider
-            maxSnack={3}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            autoHideDuration={1000}
-          >
-            {loading ? <Loader /> : children}
-          </SnackbarProvider>
+          <AuthProvider>
+            <SnackbarProvider
+              maxSnack={3}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              autoHideDuration={1000}
+            >
+              {loading ? <Loader /> : children}
+            </SnackbarProvider>
+          </AuthProvider>
         </div>
       </body>
     </html>

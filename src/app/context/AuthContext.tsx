@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { deleteCookie, getCookie } from "cookies-next";
-import { AuthContextType, User, UserProfile } from "./type";
+import { AuthContextType, User } from "./type";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -14,21 +14,17 @@ export function AuthProvider({
   const [user, setUser] = useState<User | undefined>();
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [profileDetails, setProfileDetails] = useState<
-    UserProfile | undefined
-  >();
-  const token = getCookie("token") || "";
-  const UserId = getCookie("UserId") || "";
 
-  function logout() {
-    setLoading(true);
+  const token = getCookie("token") || "";
+  const UserId = getCookie("userId") || "";
+
+  const logout = () => {
     deleteCookie("token");
-    deleteCookie("UserId");
+    deleteCookie("userId");
     setTimeout(() => {
       router.push("/");
-      setLoading(false);
     }, 1000);
-  }
+  };
 
   const memoedValue = useMemo(
     () => ({
@@ -37,9 +33,9 @@ export function AuthProvider({
       loading,
       setLoading,
       error,
+      setError,
       logout,
       token,
-      profileDetails,
       UserId,
     }),
     [user, loading, error],

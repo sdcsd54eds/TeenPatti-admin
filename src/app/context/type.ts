@@ -1,11 +1,22 @@
 export interface User {
-  UserId?: string;
-  email?: string;
-  full_name?: string;
-  msg?: string;
-  status?: string;
-  token?: string;
-  username?: string;
+  _id: string;
+  name: string;
+  username: string;
+  email: string;
+  password_hash: string;
+  login_type: string;
+  chips_balance: number;
+  total_games_played: number;
+  total_wins: number;
+  is_admin: boolean;
+  version: string;
+  last_login: string; // ISO 8601 format
+  is_blocked: boolean;
+  is_deleted: boolean;
+  created_at: string; // ISO 8601 format
+  updated_at: string; // ISO 8601 format
+  createdAt: string; // ISO 8601 format
+  updatedAt: string; // ISO 8601 format
 }
 
 export interface AuthContextType {

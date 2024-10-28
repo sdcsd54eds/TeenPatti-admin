@@ -176,8 +176,7 @@ const menuGroups = [
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
-  const pathname = usePathname();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
 
   return (
@@ -261,7 +260,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   alt="User"
                   className="h-10 w-10 rounded-full object-cover"
                 />
-                <span className="text-md text-white">Jeremy</span>
+                <span className="text-md text-white">{user?.name}</span>
               </div>
               <div className="flex items-center space-x-4">
                 <FaRegBell className="text-xl text-white" />
