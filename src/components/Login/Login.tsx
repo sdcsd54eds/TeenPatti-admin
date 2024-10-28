@@ -58,15 +58,15 @@ export default function Login() {
         formData.password,
       );
       setUser(response.user);
-      router.push("/dashboard");
       setCookie("token", response.token, { maxAge: 60 * 60 * 24 * 30 });
       setCookie("userId", response.user._id, { maxAge: 60 * 60 * 24 * 30 });
+      setCookie("UserName", response.user.name, { maxAge: 60 * 60 * 24 * 30 });
       showSnackbar("Login successful", "success");
+      router.push("/dashboard");
+      setLoader(false);
     } catch (error: any) {
       showSnackbar(error.response.data.message, "error");
       setErrors((prev) => ({ ...prev, password: error.response.data.message }));
-    } finally {
-      setLoader(false);
     }
   };
 

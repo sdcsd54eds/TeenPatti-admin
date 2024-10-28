@@ -25,7 +25,8 @@ axiosInstance.interceptors.response.use(
     //  response.data?.msg == "unauthorized"
     if (response.data.status == "405") {
       deleteCookie("token");
-      deleteCookie("UserId");
+      deleteCookie("userId");
+      deleteCookie("username");
       window.location.href = "/";
     }
     return response;

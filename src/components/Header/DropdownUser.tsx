@@ -2,12 +2,9 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
-import { BsDot } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
-import useAuth from "@/app/context/AuthContext";
 
 const DropdownUser = () => {
-  const { user } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
@@ -33,7 +30,7 @@ const DropdownUser = () => {
         <span className="hidden text-right lg:block">
           <div className="flex">
             <span className="block text-sm font-medium text-black dark:text-white">
-              {user?.name}
+              {"test test"}
             </span>
             <span className="ms-1 rounded-md bg-[#6B69F9] px-2 text-sm font-bold text-white">
               Admin

@@ -4,11 +4,9 @@ import PlayerTable from "./PlayerTable";
 import { LuTrash } from "react-icons/lu";
 import { GoChevronDown } from "react-icons/go";
 import useSnackbar from "@/hooks/useSnackbar";
-import useAuth from "@/app/context/AuthContext";
 
 function Players() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
   const { showSnackbar } = useSnackbar();
   const HandleDeleteAllPlayer = () => {
     showSnackbar("Delete all player...", "success");
@@ -31,9 +29,7 @@ function Players() {
         </div>
         <div className="text-dark text-md mb-4 font-semibold md:mb-0 md:text-xl">
           <span className="text-md text-[#6E6DFE]">Total Chips: </span>
-          <span className="text-md pl-1 text-[#6E6DFE]">
-            {user?.chips_balance}
-          </span>
+          <span className="text-md pl-1 text-[#6E6DFE]">{"10,000"}</span>
         </div>
         <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-4 md:space-y-0">
           <span className="text-lg font-medium">Login Type</span>
@@ -50,7 +46,6 @@ function Players() {
               All <GoChevronDown className="ms-1 h-6 w-6" />
             </button>
 
-            {/* Backdrop for Dropdown */}
             {isOpen && (
               <>
                 <div

@@ -17,6 +17,7 @@ export function AuthProvider({
 
   const token = getCookie("token") || "";
   const UserId = getCookie("userId") || "";
+  const UserName = getCookie("userName") || "";
 
   const logout = () => {
     deleteCookie("token");
@@ -37,6 +38,7 @@ export function AuthProvider({
       logout,
       token,
       UserId,
+      UserName,
     }),
     [user, loading, error],
   );
