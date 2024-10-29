@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import SidebarDropdown from "@/components/Sidebar/SidebarDropdown";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const SidebarItem = ({ item, pageName, setPageName }: any) => {
   const handleClick = () => {
@@ -10,7 +10,7 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
     return setPageName(updatedPageName);
   };
 
-  const pathname = useRouter();
+  const pathname = usePathname();
 
   const isActive = (item: any) => {
     if (item.route === pathname) return true;
