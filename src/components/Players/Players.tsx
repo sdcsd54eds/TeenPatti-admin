@@ -4,6 +4,7 @@ import PlayerTable from "./PlayerTable";
 import { LuTrash } from "react-icons/lu";
 import { GoChevronDown } from "react-icons/go";
 import useSnackbar from "@/hooks/useSnackbar";
+import PopUp from "../common/PopUp/PopUp";
 
 function Players() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +12,10 @@ function Players() {
   const HandleDeleteAllPlayer = () => {
     showSnackbar("Delete all player...", "success");
   };
+  const [actionModelOpen, setActionModelOpen] = useState<any>(false);
 
   return (
-    <div className="bg-gray-100 p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white md:p-6 lg:p-8">
+    <div className="bg-white p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white md:p-6 lg:p-8">
       <style>
         {`
           input::placeholder {
@@ -22,9 +24,24 @@ function Players() {
           }
         `}
       </style>
+      <PopUp
+        openPopUp={actionModelOpen}
+        closePopUp={() => {
+          setActionModelOpen(false);
+        }}
+        HandleSubmit={() => {
+          setActionModelOpen(false);
+        }}
+        HandleBlock={() => {
+          setActionModelOpen(false);
+        }}
+      />
 
       <div className="flex flex-col items-center justify-between px-4 py-4 md:flex-row md:px-6 md:py-5">
-        <div className="text-dark mb-4 text-2xl font-medium md:mb-0 md:text-3xl">
+        {/* <div className="text-dark mb-4 text-2xl font-medium md:mb-0 md:text-3xl">
+          Players
+        </div> */}
+        <div className="text-dark text-xl font-semibold md:text-2xl">
           Players
         </div>
         <div className="text-dark text-md mb-4 font-semibold md:mb-0 md:text-xl">
@@ -84,7 +101,7 @@ function Players() {
         </div>
       </div>
 
-      <PlayerTable />
+      <PlayerTable setActionModelOpen={setActionModelOpen} />
     </div>
   );
 }

@@ -9,10 +9,12 @@ import DashboardCard1 from "./DashboardCard1";
 import { FaGamepad, FaHeart, FaStore } from "react-icons/fa6";
 import DashboardCard2 from "./DashboardCard2";
 import { BsFillHandbagFill } from "react-icons/bs";
+import PopUp from "../common/PopUp/PopUp";
 
 const Dashboard: React.FC = () => {
   const [serverDown, setServerDown] = useState(false);
   const [playerLimit, setPlayerLimit] = useState(false);
+  const [actionModelOpen, setActionModelOpen] = useState<any>(false);
   const { showSnackbar } = useSnackbar();
 
   const handleServerDownChange = (
@@ -31,6 +33,19 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="p-4 md:p-6 lg:p-8">
+      <PopUp
+        openPopUp={actionModelOpen}
+        closePopUp={() => {
+          setActionModelOpen(false);
+        }}
+        HandleSubmit={() => {
+          setActionModelOpen(false);
+        }}
+        HandleBlock={() => {
+          setActionModelOpen(false);
+        }}
+      />
+
       <style>
         {`
           input::placeholder {
@@ -41,7 +56,7 @@ const Dashboard: React.FC = () => {
       </style>
 
       <div className="flex flex-col items-center justify-between space-y-4 px-4 py-4 md:flex-row md:space-x-6 md:space-y-0 md:px-6 md:py-5">
-        <div className="text-dark text-xl font-semibold md:text-2xl">
+        <div className="text-xl font-semibold text-black md:text-2xl">
           Dashboard Overview
         </div>
         <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-4 md:space-y-0">
@@ -83,9 +98,9 @@ const Dashboard: React.FC = () => {
           >
             <FaHeart className="h-5 w-5 text-[#6254FF]" />
           </DashboardCard1>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <DashboardCard2 />
-          </div>
+          </div> */}
         </div>
         <div className="grid">
           <DashboardCard1
@@ -95,29 +110,29 @@ const Dashboard: React.FC = () => {
           >
             <FaGamepad className="h-6 w-6 text-[#2FE5A7]" />
           </DashboardCard1>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <DashboardCard2 />
-          </div>
+          </div> */}
         </div>
         <div className="grid">
           <DashboardCard1 className="bg-[#FF69B44D]" title="Ludo" total="90+">
             <BsFillHandbagFill className="h-5 w-5 text-[#FF69B4]" />
           </DashboardCard1>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <DashboardCard2 />
-          </div>
+          </div> */}
         </div>
         <div className="grid">
           <DashboardCard1 className="bg-[#605CFF4D]" title="Rummy" total="12+">
             <FaStore className="h-5 w-5 text-white" />
           </DashboardCard1>
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <DashboardCard2 />
-          </div>
+          </div> */}
         </div>
       </div>
 
-      <DashboardTable />
+      <DashboardTable setActionModelOpen={setActionModelOpen} />
     </div>
   );
 };

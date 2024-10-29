@@ -16,7 +16,10 @@ function BlockedPlayer() {
       </style>
 
       <div className="flex flex-col items-center justify-between px-4 py-4 md:flex-row md:px-6 md:py-5">
-        <div className="text-dark mb-4 text-2xl font-semibold md:mb-0 md:text-3xl">
+        {/* <div className="text-dark mb-4 text-2xl font-semibold md:mb-0 md:text-3xl">
+          Blocked Player
+        </div> */}
+        <div className="text-xl font-semibold text-black md:text-2xl">
           Blocked Player
         </div>
 

@@ -105,6 +105,13 @@ export default function BlockedPlayerTable() {
           <FiMoreHorizontal className="h-5 w-5" />
         </button>
       ),
+      cellStyle: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: "bold",
+        textAlign: "center",
+      },
     },
   ];
 

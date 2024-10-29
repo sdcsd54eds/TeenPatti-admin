@@ -20,11 +20,13 @@ interface RowData {
 interface CustomBlockedPlayerTableProps {
   rowData: RowData[];
   columnDefs: ColDef<RowData>[];
+  defaultColDef?: ColDef<RowData>;
 }
 
 const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
   rowData,
   columnDefs,
+  defaultColDef,
 }) => {
   return (
     <div className="ag-theme-alpine-dark h-[400px] w-full dark:bg-[#1a1a2e] dark:text-white">
@@ -53,6 +55,13 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
           align-items: center;
           justify-content: center;
         }
+        .ag-header-cell-label {
+          justify-content: center;
+        }
+        .ag-header-cell-label {
+          justify-content: center;
+        }
+
         .ag-theme-alpine-dark .ag-body-viewport,
         .ag-theme-alpine-dark .ag-body-horizontal-scroll-viewport,
         .ag-theme-alpine-dark .ag-body-vertical-scroll-viewport {
@@ -68,15 +77,17 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
         columnDefs={columnDefs}
         defaultColDef={{
           sortable: true,
+          flex: 1,
           filter: true,
-          resizable: true,
-          cellStyle: {
-            display: "flex",
-            alignItems: "left",
-            justifyContent: "left",
-            fontWeight: "bold",
-            textAlign: "left",
-          },
+          // resizable: true,
+          // cellStyle: {
+          //   display: "flex",
+          //   alignItems: "left",
+          //   justifyContent: "left",
+          //   fontWeight: "bold",
+          //   textAlign: "left",
+          // },
+          ...defaultColDef,
         }}
         animateRows={true}
       />

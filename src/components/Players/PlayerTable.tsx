@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { ColDef } from "ag-grid-community";
@@ -22,7 +22,11 @@ interface RowData {
   avatar: string;
 }
 
-export default function PlayerTable() {
+export default function PlayerTable({
+  setActionModelOpen,
+}: {
+  setActionModelOpen: Dispatch<SetStateAction<any>>;
+}) {
   const rowData: RowData[] = [
     {
       name: "Arrora gaur",
@@ -169,9 +173,21 @@ export default function PlayerTable() {
       headerName: "Action",
       cellRenderer: () => (
         <button className="text-gray-400 hover:text-gray-600">
-          <FiMoreHorizontal className="h-5 w-5" />
+          <FiMoreHorizontal
+            className="h-5 w-5"
+            onClick={() => {
+              setActionModelOpen(true);
+            }}
+          />{" "}
         </button>
       ),
+      cellStyle: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: "bold",
+        textAlign: "center",
+      },
     },
   ];
 
