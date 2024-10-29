@@ -1,9 +1,31 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import BlockedPlayerTable from "./BlockedPlayerTable";
 import { CiSettings } from "react-icons/ci";
 import { HiMagnifyingGlass } from "react-icons/hi2";
+import DummyMenu from "./DummyMenu";
+import { UserUnBlock } from "@/api/api";
+import useSnackbar from "@/hooks/useSnackbar";
 
 function BlockedPlayer() {
+  const HandleUpdate = () => {
+    alert("Update.");
+  };
+
+  const [blockPlayerModel, setBlockPlayerModel] = useState<{
+    open: boolean;
+    userId?: string;
+    name?: string;
+  }>({ open: false });
+  const { showSnackbar } = useSnackbar();
+
+  const HandleUnBlockUser = async () => {
+    if (blockPlayerModel.userId) {
+      const response = await UserUnBlock(blockPlayerModel.userId);
+      showSnackbar(response.message, "default");
+    }
+  };
+
   return (
     <div className="mx-4 mt-5">
       <style>
@@ -14,6 +36,16 @@ function BlockedPlayer() {
           }
         `}
       </style>
+      {blockPlayerModel && (
+        <DummyMenu
+          isBlock={false}
+          name={blockPlayerModel.name}
+          openPopUp={blockPlayerModel.open}
+          closePopUp={() => setBlockPlayerModel({ open: false })}
+          HandleUnBlockUser={HandleUnBlockUser}
+          HandleUpdate={HandleUpdate}
+        />
+      )}
 
       <div className="flex flex-col items-center justify-between px-4 py-4 md:flex-row md:px-6 md:py-5">
         {/* <div className="text-dark mb-4 text-2xl font-semibold md:mb-0 md:text-3xl">
@@ -51,7 +83,7 @@ function BlockedPlayer() {
           </div>
         </div>
       </div>
-      <BlockedPlayerTable />
+      <BlockedPlayerTable setBlockPlayerModel={setBlockPlayerModel} />
     </div>
   );
 }

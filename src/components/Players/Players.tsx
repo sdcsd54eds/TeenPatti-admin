@@ -4,49 +4,63 @@ import PlayerTable from "./PlayerTable";
 import { LuTrash } from "react-icons/lu";
 import { GoChevronDown } from "react-icons/go";
 import useSnackbar from "@/hooks/useSnackbar";
-import PopUp from "../common/PopUp/PopUp";
+import DummyMenu from "../BlockedPlayer/DummyMenu";
+import { UserBlock } from "@/api/api";
 
 function Players() {
   const [isOpen, setIsOpen] = useState(false);
+  const [totalChips, setTotalChips] = useState<string>("");
+
+  const [PlayerModel, setPlayerModel] = useState<{
+    open: boolean;
+    userId?: string;
+    name?: string;
+  }>({ open: false });
+
   const { showSnackbar } = useSnackbar();
   const HandleDeleteAllPlayer = () => {
     showSnackbar("Delete all player...", "success");
   };
-  const [actionModelOpen, setActionModelOpen] = useState<any>(false);
+
+  const HandleUpdate = () => {};
+  const HandleBlockUser = async () => {
+    if (PlayerModel.userId) {
+      const response = await UserBlock(PlayerModel.userId);
+      showSnackbar(response.message, "default");
+    }
+  };
 
   return (
     <div className="bg-white p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white md:p-6 lg:p-8">
       <style>
         {`
-          input::placeholder {
-            color: #fff;
-            opacity: 0.7;
-          }
-        `}
+            input::placeholder {
+              color: #fff;
+              opacity: 0.7;
+            }
+          `}
       </style>
-      <PopUp
-        openPopUp={actionModelOpen}
-        closePopUp={() => {
-          setActionModelOpen(false);
-        }}
-        HandleSubmit={() => {
-          setActionModelOpen(false);
-        }}
-        HandleBlock={() => {
-          setActionModelOpen(false);
-        }}
-      />
+      {PlayerModel && (
+        <DummyMenu
+          isBlock={true}
+          name={PlayerModel.name}
+          openPopUp={PlayerModel.open}
+          closePopUp={() => setPlayerModel({ open: false })}
+          HandleBlockUser={HandleBlockUser}
+          HandleUpdate={HandleUpdate}
+        />
+      )}
 
       <div className="flex flex-col items-center justify-between px-4 py-4 md:flex-row md:px-6 md:py-5">
         {/* <div className="text-dark mb-4 text-2xl font-medium md:mb-0 md:text-3xl">
-          Players
-        </div> */}
+            Players
+          </div> */}
         <div className="text-dark text-xl font-semibold md:text-2xl">
           Players
         </div>
         <div className="text-dark text-md mb-4 font-semibold md:mb-0 md:text-xl">
           <span className="text-md text-[#6E6DFE]">Total Chips: </span>
-          <span className="text-md pl-1 text-[#6E6DFE]">{"10,000"}</span>
+          <span className="text-md pl-1 text-[#6E6DFE]">{totalChips}</span>
         </div>
         <div className="flex w-full flex-col items-center space-y-4 md:w-auto md:flex-row md:space-x-4 md:space-y-0">
           <span className="text-lg font-medium">Login Type</span>
@@ -101,7 +115,10 @@ function Players() {
         </div>
       </div>
 
-      <PlayerTable setActionModelOpen={setActionModelOpen} />
+      <PlayerTable
+        setPlayerModel={setPlayerModel}
+        setTotalChips={setTotalChips}
+      />
     </div>
   );
 }

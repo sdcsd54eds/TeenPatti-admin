@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
@@ -64,7 +63,7 @@ const menuGroups = [
       {
         icon: <BsMicrosoft className="h-5 w-5" />,
         label: "App Version",
-        route: "#",
+        route: "/app-version",
       },
       {
         icon: <FaRegSmile className="h-5 w-5" />,
@@ -80,17 +79,17 @@ const menuGroups = [
       {
         icon: <GiDoubleDiaphragm className="h-5 w-5" />,
         label: "Welcome Chips",
-        route: "#",
+        route: "/welcome-chips",
       },
       {
         icon: <IoDiamondOutline className="h-5 w-5" />,
         label: "Daily Reward",
-        route: "#",
+        route: "/daily-reward",
       },
       {
         icon: <VscGraphLine className="h-5 w-5" />,
         label: "Ad Reward",
-        route: "#",
+        route: "/ad-reward",
       },
     ],
   },
@@ -126,7 +125,7 @@ const menuGroups = [
       {
         icon: <RxCountdownTimer className="h-5 w-5" />,
         label: "Payment History",
-        route: "#",
+        route: "/payment-history",
       },
       {
         icon: <MdInsertPageBreak className="h-5 w-5" />,
@@ -270,7 +269,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </div>
             </div>
           </nav>
-          {/* <!-- Sidebar Menu --> */}
         </div>
       </aside>
     </ClickOutside>

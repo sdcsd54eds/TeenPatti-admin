@@ -16,13 +16,13 @@ export default function Home() {
 
   return (
     <>
-      {/* {!token ? ( */}
-      {/* <Login /> */}
-      {/* ) : ( */}
-      <DefaultLayout>
-        <Dashboard /> // Render Dashboard when token is present
-      </DefaultLayout>
-      {/* )} */}
+      {!token ? (
+        <Login />
+      ) : (
+        <DefaultLayout>
+          <Dashboard />
+        </DefaultLayout>
+      )}
     </>
   );
 }

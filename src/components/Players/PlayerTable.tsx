@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { ColDef } from "ag-grid-community";
@@ -9,6 +9,7 @@ import { CiClock2, CiMail } from "react-icons/ci";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
 import CustomTable from "../common/Table/CustomTable";
+import { getUnBlockUser } from "@/api/api";
 
 interface RowData {
   name: string;
@@ -23,100 +24,44 @@ interface RowData {
 }
 
 export default function PlayerTable({
-  setActionModelOpen,
+  setPlayerModel,
+  setTotalChips = "",
 }: {
-  setActionModelOpen: Dispatch<SetStateAction<any>>;
+  setPlayerModel: Dispatch<SetStateAction<any>>;
+  setTotalChips: any;
 }) {
-  const rowData: RowData[] = [
-    {
-      name: "Arrora gaur",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Guest",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Arrora@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=1",
-    },
-    {
-      name: "Arrora gaur",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Guest",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Arrora@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=2",
-    },
-    {
-      name: "James",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Facebook",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "James@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=3",
-    },
-    {
-      name: "Robert 1",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Google",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Robert@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=4",
-    },
-    {
-      name: "Robert 1",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Google",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Robert@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=4",
-    },
-    {
-      name: "Robert 1",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Google",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Robert@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=4",
-    },
-    {
-      name: "Robert 1",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Google",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Robert@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=4",
-    },
-    {
-      name: "Robert 1",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Google",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Robert@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=4",
-    },
-  ];
+  const [rowData, setRowData] = useState<RowData[]>([]);
+  const [isBlocked] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [isBlocked]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await getUnBlockUser();
+      const mappedData = response.map((user: any) => ({
+        name: user.name,
+        invoiceId: user._id,
+        chips: user.chips_balance,
+        loginType: user.login_type,
+        version: user.version,
+        lastLogin: new Date(user.last_login).toLocaleDateString(),
+        createdAt: new Date(user.created_at).toLocaleDateString(),
+        email: user.email,
+        avatar:
+          "https://i.pravatar.cc/50?img=" + Math.floor(Math.random() * 10 + 1),
+      }));
+      const TotalChips = response.reduce(
+        (sum: number, user: any) => sum + user.chips_balance,
+        0,
+      );
+      setTotalChips(TotalChips);
+      setRowData(mappedData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const columnDefs: Array<ColDef<RowData>> = [
     {
@@ -127,8 +72,8 @@ export default function PlayerTable({
           <Image
             src={params.data.avatar}
             alt="avatar"
-            height={24}
-            width={24}
+            height={30}
+            width={30}
             className="rounded-full"
           />
           <span>{params.value}</span>
@@ -171,14 +116,18 @@ export default function PlayerTable({
     },
     {
       headerName: "Action",
-      cellRenderer: () => (
+      cellRenderer: (params: any) => (
         <button className="text-gray-400 hover:text-gray-600">
           <FiMoreHorizontal
             className="h-5 w-5"
             onClick={() => {
-              setActionModelOpen(true);
+              setPlayerModel({
+                open: true,
+                userId: params.data.invoiceId,
+                name: params.data.name,
+              });
             }}
-          />{" "}
+          />
         </button>
       ),
       cellStyle: {

@@ -43,7 +43,15 @@ function disallowedPathsForLoggedInUser(path: string): boolean {
 }
 
 function isAllowedWithoutLogin(path: string): boolean {
-  const allowedPaths = ["/policy", "/rules", "/manifest.json"];
+  const allowedPaths = [
+    "/dashboard",
+    "/players",
+    "/blocked-player",
+    "/welcome-chips",
+    "/daily-reward",
+    "/ad-reward",
+    "/payment-history",
+  ];
   return allowedPaths.includes(path);
 }
 

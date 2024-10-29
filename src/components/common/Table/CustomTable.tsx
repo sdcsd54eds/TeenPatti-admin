@@ -1,4 +1,3 @@
-// CustomBlockedPlayerTable.tsx
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -29,7 +28,7 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
   defaultColDef,
 }) => {
   return (
-    <div className="ag-theme-alpine-dark h-[400px] w-full dark:bg-[#1a1a2e] dark:text-white">
+    <div className="ag-theme-alpine-dark h-[400px] w-full overflow-x-auto">
       <style jsx global>{`
         .ag-theme-alpine-dark {
           --ag-background-color: #ffffff;
@@ -58,9 +57,6 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
         .ag-header-cell-label {
           justify-content: center;
         }
-        .ag-header-cell-label {
-          justify-content: center;
-        }
 
         .ag-theme-alpine-dark .ag-body-viewport,
         .ag-theme-alpine-dark .ag-body-horizontal-scroll-viewport,
@@ -71,6 +67,23 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
           min-height: 30px;
           background-color: var(--ag-background-color);
         }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+          .ag-theme-alpine-dark .ag-header-cell,
+          .ag-theme-alpine-dark .ag-cell {
+            font-size: 12px; /* Smaller font size on small screens */
+            padding: 4px 6px; /* Adjust padding */
+          }
+        }
+
+        @media (max-width: 480px) {
+          .ag-theme-alpine-dark .ag-header-cell,
+          .ag-theme-alpine-dark .ag-cell {
+            font-size: 10px; /* Even smaller font size for extra small screens */
+            padding: 2px 4px; /* Adjust padding */
+          }
+        }
       `}</style>
       <AgGridReact
         rowData={rowData}
@@ -79,17 +92,11 @@ const CustomTable: React.FC<CustomBlockedPlayerTableProps> = ({
           sortable: true,
           flex: 1,
           filter: true,
-          // resizable: true,
-          // cellStyle: {
-          //   display: "flex",
-          //   alignItems: "left",
-          //   justifyContent: "left",
-          //   fontWeight: "bold",
-          //   textAlign: "left",
-          // },
+          minWidth: 200,
           ...defaultColDef,
         }}
         animateRows={true}
+        enableCellTextSelection={true}
       />
     </div>
   );

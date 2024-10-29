@@ -5,7 +5,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply font-sans relative z-1 bg-white text-base font-normal text-body;
+    @apply relative z-1 bg-white font-sans text-base font-normal text-body;
   }
 }
 

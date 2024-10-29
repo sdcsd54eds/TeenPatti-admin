@@ -1,13 +1,14 @@
 // BlockedPlayerTable.tsx
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ColDef } from "ag-grid-community";
 import { CiClock2, CiMail } from "react-icons/ci";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Image from "next/image";
 import CustomTable from "../common/Table/CustomTable";
+import { getBlockUser } from "@/api/api";
 
 interface RowData {
   name: string;
@@ -21,48 +22,40 @@ interface RowData {
   avatar: string;
 }
 
-export default function BlockedPlayerTable() {
-  const rowData: RowData[] = [
-    {
-      name: "Arrora gaur",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Guest",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "Arrora@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=1",
-    },
-    {
-      name: "James",
-      invoiceId: "#876369",
-      chips: 1000,
-      loginType: "Facebook",
-      version: "1.0",
-      lastLogin: "12 Dec, 2020",
-      createdAt: "12 Dec, 2020",
-      email: "James@gmail.com",
-      avatar: "https://i.pravatar.cc/50?img=3",
-    },
-  ];
+export default function BlockedPlayerTable({ setBlockPlayerModel }: any) {
+  const [rowData, setRowData] = useState<RowData[]>([]);
+  const [isBlocked] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [isBlocked]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await getBlockUser();
+      const mappedData = response.map((user: any) => ({
+        name: user.name,
+        invoiceId: user._id,
+        chips: user.chips_balance,
+        loginType: user.login_type,
+        version: user.version,
+        lastLogin: new Date(user.last_login).toLocaleDateString(),
+        createdAt: new Date(user.created_at).toLocaleDateString(),
+        email: user.email,
+        avatar: "",
+      }));
+      setRowData(mappedData);
+      console.log("User data:", mappedData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const columnDefs: Array<ColDef<RowData>> = [
     {
       field: "name",
       headerName: "Name",
-      cellRenderer: (params: any) => (
-        <div className="flex items-center gap-2">
-          <Image
-            src={params.data.avatar}
-            alt="avatar"
-            height={24}
-            width={24}
-            className="rounded-full"
-          />
-          <span>{params.value}</span>
-        </div>
-      ),
+      cellRenderer: (params: any) => <span>{params.value}</span>,
     },
     { field: "invoiceId", headerName: "Invoice Id" },
     { field: "chips", headerName: "Chips" },
@@ -100,8 +93,17 @@ export default function BlockedPlayerTable() {
     },
     {
       headerName: "Action",
-      cellRenderer: () => (
-        <button className="text-gray-400 hover:text-gray-600">
+      cellRenderer: (params: any) => (
+        <button
+          onClick={() => {
+            setBlockPlayerModel({
+              open: true,
+              userId: params.data.invoiceId,
+              name: params.data.name,
+            });
+          }}
+          className="text-gray-400 hover:text-gray-600"
+        >
           <FiMoreHorizontal className="h-5 w-5" />
         </button>
       ),
