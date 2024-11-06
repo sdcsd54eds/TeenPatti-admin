@@ -5,6 +5,7 @@ import { getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import LoaderFullScreen from "../common/Loader/LoaderFullScreen";
 import useAuth from "@/app/context/AuthContext";
 
@@ -22,6 +23,11 @@ export default function Login() {
     password: "",
   });
   const [loader, setLoader] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   // useEffect(() => {
   //   if (token) {
@@ -65,7 +71,7 @@ export default function Login() {
       router.push("/dashboard");
       setLoader(false);
     } catch (error: any) {
-      showSnackbar(error.response.data.message, "error");
+      // showSnackbar(error.response.data, "error");
       setErrors((prev) => ({ ...prev, password: error.response.data.message }));
     }
   };
@@ -128,16 +134,27 @@ export default function Login() {
                 </a>
               </div>
             </div>
-            <div className="mt-2">
+            <div className="relative mt-2">
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={formData.password}
                 onChange={handleChange}
                 autoComplete="current-password"
                 className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
               />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible className="h-5 w-5" />
+                ) : (
+                  <AiOutlineEye className="h-5 w-5" />
+                )}
+              </button>
               {errors.password && (
                 <p className="py-1 text-sm font-bold text-red-500">
                   {errors.password}
