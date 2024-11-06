@@ -36,10 +36,6 @@ export default function RootLayout({
           href="/images/logo/main-logo.svg"
           type="image/svg+xml"
         />
-        <meta
-          http-equiv="Content-Security-Policy"
-          content="upgrade-insecure-requests; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:"
-        />
       </head>
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">

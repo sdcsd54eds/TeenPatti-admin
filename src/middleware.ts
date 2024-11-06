@@ -3,17 +3,27 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const currentUser = request.cookies.get("token")?.value;
   const path = request.nextUrl.pathname;
+  // let isMaintenanceMode = false;
 
-  // Define CSP headers to allow insecure content on all devices
-  const response = NextResponse.next();
-  response.headers.set(
-    "Content-Security-Policy",
-    "upgrade-insecure-requests; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;",
-  );
+  // try {
+  //   const response = await fetch('https://api.fireludo.com/v1/Ludoapi/apiRoute?action=checkMaintenaceMode', { method: 'GET' });
+  //   const data = await response.json();
+
+  //   if (data.status === "success" && data.mode === '1') {
+  //     isMaintenanceMode = true;
+  //   }
+  // } catch (error) {
+  //   console.error('Error fetching maintenance mode:', error);
+  // }
+
+  // if (isMaintenanceMode) {
+  //   request.nextUrl.pathname = `/maintenance`;
+  //   return NextResponse.rewrite(request.nextUrl);
+  // }
 
   if (currentUser) {
     if (disallowedPathsForLoggedInUser(path) && !isAllowedWithoutLogin(path)) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+      return Response.redirect(new URL("/dashboard", request.url));
     }
   } else {
     if (
@@ -22,11 +32,9 @@ export async function middleware(request: NextRequest) {
       path !== "/" &&
       !isAllowedWithoutLogin(path)
     ) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return Response.redirect(new URL("/login", request.url));
     }
   }
-
-  return response;
 }
 
 function disallowedPathsForLoggedInUser(path: string): boolean {
