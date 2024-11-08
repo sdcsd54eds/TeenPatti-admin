@@ -8,8 +8,7 @@ interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
 
 // Create an axios instance with the base URL for your API
 export const axiosInstance = axios.create({
-  baseURL:
-    "http://admin-panel-env.eba-wrphxypt.ap-south-1.elasticbeanstalk.com",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 // Request Interceptor
