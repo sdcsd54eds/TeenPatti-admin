@@ -31,7 +31,7 @@ function Players() {
   };
 
   return (
-    <div className="bg-white p-4 text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white md:p-6 lg:p-8">
+    <div className="bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-white md:p-4 lg:p-6">
       <style>
         {`
             input::placeholder {
