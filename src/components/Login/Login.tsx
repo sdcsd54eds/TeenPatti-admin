@@ -10,6 +10,8 @@ import LoaderFullScreen from "../common/Loader/LoaderFullScreen";
 import useAuth from "@/app/context/AuthContext";
 
 export default function Login() {
+  const loginEndpoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login`;
+  console.log("loginEndpoint :>> ", loginEndpoint);
   const router = useRouter();
   const token = getCookie("token");
   const { setUser } = useAuth();
@@ -59,10 +61,20 @@ export default function Login() {
     }
     try {
       setLoader(true);
-      const response: any = await loginAdmin(
-        formData.username,
-        formData.password,
-      );
+      // const response: any = await loginAdmin(
+      //   formData.username,
+      //   formData.password,
+      // );
+      const data = {
+        username: formData.username,
+        password: formData.password,
+      };
+      const response: any = await fetch(loginEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      console.log("login response :>> ", response);
       setUser(response.user);
       setCookie("token", response.token, { maxAge: 60 * 60 * 24 * 30 });
       setCookie("userId", response.user._id, { maxAge: 60 * 60 * 24 * 30 });
