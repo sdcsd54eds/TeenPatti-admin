@@ -10,7 +10,7 @@ export const loginAdmin = async (
   password: string,
 ): Promise<LoginResponse> => {
   try {
-    const response = await axiosInstance.post<LoginResponse>("/login", {
+    const response = await axiosInstance.post<LoginResponse>("/admin/login", {
       username,
       password,
     });
