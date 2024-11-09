@@ -6,9 +6,15 @@ interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
   headers: AxiosRequestHeaders;
 }
 
-// Create an axios instance with the base URL for your API
+// Determine the base URL based on the environment
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://admin-panel-env.eba-wrphxypt.ap-south-1.elasticbeanstalk.com/api"
+    : process.env.NEXT_PUBLIC_API_BASE_URL;
+
+// Create an axios instance with the dynamic base URL
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL,
 });
 
 // Request Interceptor
@@ -21,7 +27,7 @@ axiosInstance.interceptors.request.use(
 
     return config as AdaptAxiosRequestConfig;
   },
-  (error): any => {
+  (error) => {
     console.error("Request error:", error);
     return Promise.reject(error);
   },
@@ -29,7 +35,7 @@ axiosInstance.interceptors.request.use(
 
 // Response Interceptor
 axiosInstance.interceptors.response.use(
-  async (response): Promise<any> => {
+  async (response) => {
     // Check if response status indicates unauthorized access
     if (response.data.status === "405") {
       // Delete authentication-related cookies
@@ -43,7 +49,7 @@ axiosInstance.interceptors.response.use(
 
     return response;
   },
-  async (error): Promise<any> => {
+  async (error) => {
     console.error("Response error:", error);
 
     // Handle specific error status codes if needed

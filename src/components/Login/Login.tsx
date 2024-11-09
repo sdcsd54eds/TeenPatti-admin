@@ -72,7 +72,10 @@ export default function Login() {
       setLoader(false);
     } catch (error: any) {
       // showSnackbar(error.response.data, "error");
-      setErrors((prev) => ({ ...prev, password: error.response.data.message }));
+      setErrors((prev) => ({
+        ...prev,
+        password: error.response?.data?.message || "Login failed",
+      }));
     }
   };
 
