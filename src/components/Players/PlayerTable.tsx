@@ -49,8 +49,6 @@ export default function PlayerTable({
         lastLogin: new Date(user.last_login).toLocaleDateString(),
         createdAt: new Date(user.created_at).toLocaleDateString(),
         email: user.email,
-        avatar:
-          "https://i.pravatar.cc/50?img=" + Math.floor(Math.random() * 10 + 1),
       }));
       const TotalChips = response.reduce(
         (sum: number, user: any) => sum + user.chips_balance,
@@ -64,22 +62,6 @@ export default function PlayerTable({
   };
 
   const columnDefs: Array<ColDef<RowData>> = [
-    {
-      field: "name",
-      headerName: "Name",
-      cellRenderer: (params: any) => (
-        <div className="flex items-center gap-2">
-          <Image
-            src={params.data.avatar}
-            alt="avatar"
-            height={30}
-            width={30}
-            className="rounded-full"
-          />
-          <span>{params.value}</span>
-        </div>
-      ),
-    },
     { field: "invoiceId", headerName: "Invoice Id" },
     { field: "chips", headerName: "Chips" },
     { field: "loginType", headerName: "Login type" },
