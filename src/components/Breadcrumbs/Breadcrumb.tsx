@@ -15,7 +15,7 @@ const Breadcrumb = ({ pageName, titleShow = false }: BreadcrumbProps) => {
         <ol className="flex items-start gap-2 text-sm">
           <li>
             <Link
-              href={`/${pageName}`}
+              href={`${pageName}`}
               passHref
               className="text-sm font-medium uppercase dark:text-white"
             >
