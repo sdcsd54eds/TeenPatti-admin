@@ -9,7 +9,6 @@ function AdReward() {
       const response = await welcomeChips();
       setAdReward(response.ad_reward);
       console.log("response :>> ", response);
-      console.log("DEMO LOG")
     };
     FetchData();
   }, []);
